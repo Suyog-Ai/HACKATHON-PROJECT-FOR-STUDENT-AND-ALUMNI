@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MSSU Portal Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #001f3f, #004080, #001a33, #003366);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+      color: white;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .navbar {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar a {
+      margin: 0 15px;
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .logo-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .logo-header img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .logo-header h1 {
+      font-size: 26px;
+      color: #ffcc00;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      border-right: .15em solid #ffcc00;
+      white-space: nowrap;
+      animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      50% { border-color: transparent }
+    }
+
+    .main-content {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .info-box {
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+      color: #eee;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      width: 350px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.4s ease;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      cursor: pointer;
+      font-weight: 600;
+      background: transparent;
+      color: black;
+      border-bottom: 2px solid transparent;
+      transition: all 0.4s ease;
+    }
+
+    .tab:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .tab.active {
+      color: #ffcc00;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    .form-section {
+      display: none;
+      animation: fadeForm 0.5s ease-in-out;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    @keyframes fadeForm {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #ddd;
+    }
+
+    input:hover {
+      box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #ffcc00;
+      color: #003366;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #e6b800;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .form-footer a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Skill Schools</a>
+    <a href="#">Student Corner</a>
+    <a href="#">Centers</a>
+    <a href="#">Updates</a>
+  </div>
+
+  <div class="logo-header">
+    <img src="MSSU-Logo_home-1-430x330.png" alt="MSSU Logo" />
+    <h1>MAHARASHTRA STATE SKILLS UNIVERSITY</h1>
+    <div class="tagline">Maharashtra's First Skills University – by Government of Maharashtra</div>
+  </div>
+
+  <div class="main-content">
+    <div class="info-box">
+      <h3>Why Choose MSSU?</h3>
+      <p>We empower youth with practical skills and real-world readiness. Industry-led programs help you become job-ready from day one.</p>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <div class="tab active" onclick="showForm('student', event)">Student</div>
+        <div class="tab" onclick="showForm('alumni', event)">Alumni</div>
+      </div>
+
+      <div id="student" class="form-section active">
+        <form onsubmit="event.preventDefault(); window.location.href='https://mssu.ac.in/#';">
+          <input type="text" placeholder="Student ID or Email" required />
+          <input type="password" placeholder="Password" required />
+          <div class="form-footer">
+            <label><input type="checkbox" /> Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <div id="alumni" class="form-section">
+        <form onsubmit="event.preventDefault(); window.location.href='https://mssu.ac.in/#';">
+          <input type="text" placeholder="Alumni Email" required />
+          <input type="password" placeholder="Password" required />
+          <div class="form-footer">
+            <label><input type="checkbox" /> Remember me</label>
+            <a href="#">Need Help?</a>
+          </div>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>Opportunities Await</h3>
+      <p>Explore career paths, internships, and partnerships with top organizations. Our ecosystem supports innovation and lifelong learning.</p>
+    </div>
+  </div>
+
+  <script>
+    function showForm(formId, event) {
+      const tabs = document.querySelectorAll('.tab');
+      const forms = document.querySelectorAll('.form-section');
+
+      tabs.forEach(tab => tab.classList.remove('active'));
+      forms.forEach(form => form.classList.remove('active'));
+
+      document.getElementById(formId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 60,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#ffffff"
+        },
+        "shape": {
+          "type": "circle"
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": true
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 3
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "repulse"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "repulse": {
+            "distance": 100,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>
